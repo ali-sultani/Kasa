@@ -1,0 +1,51 @@
+services:
+  mysqlManagementContainer:
+    image: mysql:latest
+    container_name: mysqlManagementContainer
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    volumes:
+      - ./dbscript/init.sql:/docker-entrypoint-initdb.d/0_init.sql
+    ports:
+      - 3308:3308
+    expose:
+      - 3308
+    environment:
+      MYSQL_DATABASE: management
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: letmein
+      MYSQL_ROOT_HOST: "0.0.0.0"
+      MYSQL_ROOT_PASSWORD: letmein
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysqlManagementContainer
+      MYSQL_TCP_PORT: 3308
+    networks:
+      - internalnet
+
+  nodeapp-management:
+    container_name: nodeapp-management-container
+    build: .
+    image: nodeapp-management:v1
+    volumes:
+      - $HOME/nodeapp-management:/code
+    ports:
+      - 8001:8001
+    expose:
+      - 8001
+    environment:
+      DB_HOST: mysqlManagementContainer
+      DB_PORT: 3308
+      DB_USER: admin
+      DB_PASSWORD: letmein
+      DB_NAME: management
+      DB_CONNECTION_LIMIT: 20
+      SERVICE_TAGS: dev
+      SERVICE_NAME: nodeapp-management-service
+      SERVER_PORT: 8001
+    depends_on:
+      - mysqlManagementContainer
+    networks:
+      - internalnet
+networks:
+  internalnet:
+    external: true

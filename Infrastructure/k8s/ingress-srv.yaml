@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-service
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: data.dev
+      http:
+        paths:
+          - path: "/api/data/?(.*)"
+            pathType: Prefix
+            backend:
+              service:
+                name: data-srv
+                port:
+                  number: 8001
+    - host: phpmyadmin.dev
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: phpmyadmin-service
+                port:
+                  number: 80
+                  

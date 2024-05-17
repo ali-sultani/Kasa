@@ -1,0 +1,14 @@
+image: node:18.17.0
+
+stages:
+  - test
+
+before_script:
+  - npm install
+  - npm install --os=linux --cpu=x64 sharp
+  - npm install semver
+
+test:
+  stage: test
+  script:
+    - npm run test

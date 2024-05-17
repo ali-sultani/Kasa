@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data
+  template:
+    metadata:
+      labels:
+        app: data
+    spec:
+      containers:
+        - name: data
+          image: secouriste/data
+          env:
+            - name: JWT_KEY
+              value: eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTY3NTYyODcxNSwiaWF0IjoxNjc1NjI4NzE1fQ.JV8mCNjaJjDWhZR1AbdJ2EfmZQJITLZzUH9dVgWG_B0
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-srv
+spec:
+  selector:
+    app: data
+  ports:
+    - name: data
+      protocol: TCP
+      port: 8001
+      targetPort: 8001
