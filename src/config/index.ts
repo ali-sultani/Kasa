@@ -30,10 +30,10 @@ const AUTHENTIFICATION_SERVICE_BASE_URL = "http://proxy/authentification-service
 const POSTIONSTACK_URL = "http://api.positionstack.com/v1/forward";
 
 const BUCKET_INFO = {
-  BUCKET_NAME: 'secouriste',
-  BUCKET_REGION:'ca-central-1',
-  ACCESS_KEY:'AKIAZX5GLDJ2KWT6RWE4',
-  SECRET_ACCESS_KEY:'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'
+  BUCKET_NAME: process.env.BUCKET_NAME,
+  BUCKET_REGION: process.env.BUCKET_REGION,
+  ACCESS_KEY: process.env.ACCESS_KEY,
+  SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY
 };
 
 export {
