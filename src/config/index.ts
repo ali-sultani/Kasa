@@ -29,12 +29,12 @@ const AGENDA_SERVICE_BASE_URL = "http://proxy/agenda-service";
 const AUTHENTIFICATION_SERVICE_BASE_URL = "http://proxy/authentification-service";
 const POSTIONSTACK_URL = "http://api.positionstack.com/v1/forward";
 
-const BUCKET_INFO = {
+/* const BUCKET_INFO = {
   BUCKET_NAME: process.env.BUCKET_NAME,
   BUCKET_REGION: process.env.BUCKET_REGION,
   ACCESS_KEY: process.env.ACCESS_KEY,
   SECRET_ACCESS_KEY: process.env.SECRET_ACCESS_KEY
-};
+}; */
 
 export {
   AGENDA_SERVICE_BASE_URL,
